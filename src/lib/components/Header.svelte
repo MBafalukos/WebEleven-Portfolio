@@ -74,7 +74,7 @@
       <!-- Logo / Brand & Mobile Open Button -->
       <div class="flex items-center justify-between w-full md:w-auto">
         <a
-          href="/"
+          href={getHref("/")}
           class="text-2xl font-black tracking-tighter text-white z-[110]"
         >
           PORT<span class="text-[#FF312E]">FOLIO</span>
@@ -285,14 +285,100 @@
           </div>
         </div>
 
-        <a
-          href="#contact"
-          onclick={closeMobileMenu}
-          class="bg-[#FF312E] text-white flex items-center justify-center gap-2 p-4 rounded-2xl font-black text-2xl text-center shadow-[0_20px_50px_rgba(255,49,46,0.3)]"
-        >
-          {t($activeLocale, "header.cta")}
-          <Plus class="w-4 h-4" />
-        </a>
+        <Dialog.Root>
+          <form>
+            <Dialog.Trigger
+              onclick={closeMobileMenu}
+              class="bg-[#FF312E] text-white flex items-center justify-center gap-2 p-4 rounded-2xl font-black text-2xl w-full text-center shadow-[0_20px_50px_rgba(255,49,46,0.3)]"
+            >
+              {t($activeLocale, "header.cta")}
+              <Plus class="w-4 h-4" />
+            </Dialog.Trigger>
+            <Dialog.Content
+              class="sm:max-w-[425px] bg-[#000103]/90 backdrop-blur-3xl border border-white/10 text-white rounded-2xl shadow-2xl"
+            >
+              <Dialog.Header class="space-y-3">
+                <Dialog.Title class="text-2xl font-black"
+                  >{t($activeLocale, "header.dialog.title")}</Dialog.Title
+                >
+                <Dialog.Description class="text-white/60">
+                  {t($activeLocale, "header.dialog.description")}
+                </Dialog.Description>
+              </Dialog.Header>
+              <div class="grid gap-6 py-4">
+                <div class="grid gap-3">
+                  <Label class="text-white/80"
+                    >{t($activeLocale, "header.dialog.projectType")}</Label
+                  >
+                  <Select.Root type="single" bind:value={projectType}>
+                    <Select.Trigger
+                      class="w-full bg-white/5 border-white/10 text-white hover:bg-white/10 transition-colors focus:ring-[#FF312E] focus:ring-offset-0"
+                    >
+                      {projectType
+                        ? projectType
+                        : t($activeLocale, "header.dialog.selectType")}
+                    </Select.Trigger>
+                    <Select.Content
+                      class="bg-[#000103] border-white/10 text-white"
+                    >
+                      <Select.Item
+                        value={t($activeLocale, "header.dialog.website")}
+                        class="hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer"
+                        >{t(
+                          $activeLocale,
+                          "header.dialog.website",
+                        )}</Select.Item
+                      >
+                      <Select.Item
+                        value={t($activeLocale, "header.dialog.ecommerce")}
+                        class="hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer"
+                        >{t(
+                          $activeLocale,
+                          "header.dialog.ecommerce",
+                        )}</Select.Item
+                      >
+                      <Select.Item
+                        value={t($activeLocale, "header.dialog.webapp")}
+                        class="hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer"
+                        >{t($activeLocale, "header.dialog.webapp")}</Select.Item
+                      >
+                    </Select.Content>
+                  </Select.Root>
+                </div>
+                <div class="grid gap-3 pt-4">
+                  <div class="flex items-center justify-between">
+                    <Label class="text-white/80"
+                      >{t($activeLocale, "header.dialog.budget")}</Label
+                    >
+                    <span class="text-sm font-bold text-[#FF312E]"
+                      >€{budget[0]}</span
+                    >
+                  </div>
+                  <Slider
+                    bind:value={budget}
+                    max={10000}
+                    step={100}
+                    class="py-2"
+                  />
+                </div>
+              </div>
+              <Dialog.Footer class="gap-3 sm:gap-0 mt-4">
+                <Dialog.Close
+                  type="button"
+                  class="px-6 py-2.5 rounded-xl font-bold text-sm bg-white/5 text-white hover:bg-white/10 transition-colors border border-white/10 w-full sm:w-auto"
+                >
+                  {t($activeLocale, "header.dialog.cancel")}
+                </Dialog.Close>
+                <Button
+                  type="submit"
+                  class="bg-[#FF312E] hover:bg-white hover:text-black text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 shadow-[0_0_20px_rgba(255,49,46,0.2)] w-full sm:w-auto mt-2 sm:mt-0"
+                >
+                  {t($activeLocale, "header.dialog.submit")}
+                </Button>
+              </Dialog.Footer>
+            </Dialog.Content>
+          </form>
+        </Dialog.Root>
       </div>
     </div>
   </div>

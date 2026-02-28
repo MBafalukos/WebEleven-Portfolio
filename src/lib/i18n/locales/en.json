@@ -1,0 +1,76 @@
+{
+  "header": {
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "cta": "New Project",
+    "dialog": {
+      "title": "New Project",
+      "description": "Describe your project and I'll get back to you as soon as possible.",
+      "projectType": "Project Type",
+      "selectType": "Select project type",
+      "website": "Website",
+      "ecommerce": "E-commerce",
+      "webapp": "Web App",
+      "budget": "Budget",
+      "cancel": "Cancel",
+      "submit": "Submit"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "hero": {
+    "title": "Let's make your idea digital",
+    "subtitle": "Crafting experiences that matter",
+    "cta": "Explore"
+  },
+  "about": {
+    "title": "About me",
+    "description1": "For approximately the past 10 years, I have been engaged in teaching mathematics and physics. As a recent graduate of the School of Applied Mathematical and Physical Sciences at the National Technical University of Athens, with a specialization in mathematical informatics and statistics, I aspire to become a member of the tech community and contribute to the development of modern technologies and systems aimed at solving real-world, large-scale problems.",
+    "description2": "The interview process was pleasant and straightforward. From the very beginning, the role, responsibilities, compensation, and company goals were made clear to me."
+  },
+  "projects": {
+    "title": "Projects",
+    "viewProject": "Visit Online",
+    "projectOne": {
+      "title": "Digital Portfolio",
+      "subtitle": "nasia-adam.com",
+      "description": "A personal space designed to tell a story. This portfolio brings creative work to life, ensuring every detail reflects the unique identity behind it.",
+      "features": [
+        "Clean, focused layouts",
+        "Typography that speaks",
+        "Seamless device support"
+      ]
+    },
+    "projectTwo": {
+      "title": "Brand Landing Page",
+      "subtitle": "dotheworkintensive.com",
+      "description": "A bold landing page built for action. We focused on clear paths and high energy, helping people connect with the mission while feeling the drive of the brand.",
+      "features": [
+        "Dynamic, conversion-first flow",
+        "Bold, energetic visuals",
+        "Smooth, fast performance"
+      ]
+    },
+    "projectThree": {
+      "title": "E-Commerce",
+      "subtitle": "stolesergasias.gr",
+      "description": "A shopping experience that feels intuitive. This e-shop balances complex logic with a clean interface, making every purchase feel simple and secure.",
+      "features": [
+        "Intuitive navigation",
+        "SEO-ready architecture",
+        "Simple, secure checkout"
+      ]
+    }
+  },
+  "form": {
+    "title": "Contact Me",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Send Message",
+    "gdpr": "By submitting this form, you agree to our privacy policy.",
+    "success": "Message sent successfully!"
+  }
+}

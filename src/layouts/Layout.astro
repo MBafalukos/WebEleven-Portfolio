@@ -1,0 +1,30 @@
+---
+import "../styles/global.css";
+import Header from "$lib/components/Header.svelte";
+import Footer from "$lib/components/Footer.svelte";
+import SmoothScroll from "$lib/components/SmoothScroll.svelte";
+import { getLocale } from "astro-i18n-aut";
+
+type Locale = "en" | "gr";
+
+const raw = getLocale(Astro.url);
+const locale: Locale = raw === "gr" ? "gr" : "en";
+const langAttr = locale === "gr" ? "el" : "en";
+---
+
+<html lang={langAttr}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Portfolio</title>
+  </head>
+  <body class="bg-[#000103] text-[#FFFFFA]">
+    <SmoothScroll client:only="svelte" />
+    <Header initialLocale={locale} client:load />
+    <main>
+      <slot />
+    </main>
+    <Footer client:visible />
+  </body>
+</html>

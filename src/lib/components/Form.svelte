@@ -63,7 +63,12 @@
         class="hidden lg:flex justify-center items-center p-24 relative overflow-hidden"
       >
         <img
-          src="/social-contact-svgrepo-com.svg"
+          src="{import.meta.env.BASE_URL === '/'
+            ? ''
+            : import.meta.env.BASE_URL.replace(
+                /\/$/,
+                '',
+              )}/social-contact-svgrepo-com.svg"
           alt="Contact Illustration"
           class="w-full max-w-md relative z-10 drop-shadow-[0_20px_50px_rgba(255,49,46,0.15)] hover:scale-105 transition-transform duration-700"
         />

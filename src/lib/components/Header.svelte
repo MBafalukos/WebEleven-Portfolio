@@ -27,22 +27,35 @@
     // Silently update the URL to match the language
     const currentPath = window.location.pathname;
     const hash = window.location.hash || "";
+    const siteBase =
+      import.meta.env.BASE_URL === "/"
+        ? ""
+        : import.meta.env.BASE_URL.replace(/\/$/, "");
 
-    let newPath = currentPath;
-    if (newLocale === "gr" && currentPath === "/") newPath = "/gr/";
-    else if (newLocale === "en" && currentPath === "/gr/") newPath = "/";
-    else if (newLocale === "gr" && !currentPath.startsWith("/gr"))
-      newPath = "/gr" + currentPath;
-    else if (newLocale === "en" && currentPath.startsWith("/gr"))
-      newPath = currentPath.replace("/gr", "") || "/";
+    let pathWithoutBase = currentPath;
+    if (siteBase && currentPath.startsWith(siteBase)) {
+      pathWithoutBase = currentPath.slice(siteBase.length) || "/";
+    }
 
-    window.history.replaceState({}, "", newPath + hash);
+    let newPath = pathWithoutBase;
+    if (newLocale === "gr" && pathWithoutBase === "/") newPath = "/gr/";
+    else if (newLocale === "en" && pathWithoutBase === "/gr/") newPath = "/";
+    else if (newLocale === "gr" && !pathWithoutBase.startsWith("/gr"))
+      newPath = "/gr" + pathWithoutBase;
+    else if (newLocale === "en" && pathWithoutBase.startsWith("/gr"))
+      newPath = pathWithoutBase.replace("/gr", "") || "/";
+
+    window.history.replaceState({}, "", siteBase + newPath + hash);
   }
 
   function getHref(path: string) {
     if (path.startsWith("#")) return path;
-    const base = $activeLocale === "gr" ? "/gr" : "";
-    return (base + path).replace(/\/$/, "") || "/";
+    const siteBase =
+      import.meta.env.BASE_URL === "/"
+        ? ""
+        : import.meta.env.BASE_URL.replace(/\/$/, "");
+    const localeBase = $activeLocale === "gr" ? "/gr" : "";
+    return (siteBase + localeBase + path).replace(/\/$/, "") || siteBase || "/";
   }
 
   const navLinks = $derived([

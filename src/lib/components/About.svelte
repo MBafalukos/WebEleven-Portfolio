@@ -2,7 +2,6 @@
   import { t } from "$lib/i18n/t";
   import gsap from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import * as Avatar from "$lib/components/ui/avatar/index.js";
   import { Github, Linkedin, User, File } from "@lucide/svelte";
   import { Badge } from "$lib/components/ui/badge/index.js";
   import { type Locale } from "$lib/i18n/t";
@@ -64,7 +63,7 @@
         alt="Michalis Bafalukos"
         width={500}
         height={500}
-        class="w-full h-full object-contain"
+        class="w-full h-full rounded-3xl object-contain"
       />
     </div>
   </div>

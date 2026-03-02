@@ -50,8 +50,9 @@
         <a href="https://github.com/MBafalukos" class="flex items-center gap-2"
           ><Badge>Github<Github /></Badge></a
         >
-        <a href="www.linkedin.com/in/mbafalukos" class="flex items-center gap-2"
-          ><Badge>LinkedIn<Linkedin /></Badge></a
+        <a
+          href="https://www.linkedin.com/in/mbafalukos/"
+          class="flex items-center gap-2"><Badge>LinkedIn<Linkedin /></Badge></a
         >
       </div>
     </div>

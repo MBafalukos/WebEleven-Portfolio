@@ -1,67 +1,58 @@
 <script lang="ts">
   import { t, type Locale } from "$lib/i18n/t";
   import { Menu, X, Globe, ChevronRight, Plus } from "@lucide/svelte";
-  import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
-  import * as Dialog from "$lib/components/ui/dialog/index.js";
-  import { Input } from "$lib/components/ui/input/index.js";
-  import { Label } from "$lib/components/ui/label/index.js";
-  import * as Select from "$lib/components/ui/select/index.js";
-  import { Slider } from "$lib/components/ui/slider/index.js";
   import { fade, fly } from "svelte/transition";
-  import { activeLocale } from "$lib/i18n/store";
 
   const { initialLocale = "en" } = $props<{ initialLocale?: Locale }>();
 
-  $effect(() => {
-    activeLocale.set(initialLocale);
-  });
-
   let isMobileMenuOpen = $state(false);
-  let projectType = $state("");
-  let budget = $state([1000]);
 
-  function setLocale(newLocale: string) {
-    if (newLocale === $activeLocale) return;
-    activeLocale.set(newLocale as Locale);
+  function changeLanguage(newLocale: Locale) {
+    if (newLocale === initialLocale) return;
 
-    // Silently update the URL to match the language
     const currentPath = window.location.pathname;
     const hash = window.location.hash || "";
-    const siteBase =
-      import.meta.env.BASE_URL === "/"
-        ? ""
-        : import.meta.env.BASE_URL.replace(/\/$/, "");
 
-    let pathWithoutBase = currentPath;
-    if (siteBase && currentPath.startsWith(siteBase)) {
-      pathWithoutBase = currentPath.slice(siteBase.length) || "/";
+    // Remove existing locale prefix if present
+    let cleanPath = currentPath;
+    if (currentPath.startsWith("/gr/")) {
+      cleanPath = currentPath.replace("/gr/", "/");
+    } else if (currentPath === "/gr") {
+      cleanPath = "/";
     }
 
-    let newPath = pathWithoutBase;
-    if (newLocale === "gr" && pathWithoutBase === "/") newPath = "/gr/";
-    else if (newLocale === "en" && pathWithoutBase === "/gr/") newPath = "/";
-    else if (newLocale === "gr" && !pathWithoutBase.startsWith("/gr"))
-      newPath = "/gr" + pathWithoutBase;
-    else if (newLocale === "en" && pathWithoutBase.startsWith("/gr"))
-      newPath = pathWithoutBase.replace("/gr", "") || "/";
+    // Prepend new locale if not default (en)
+    let newPath = cleanPath;
+    if (newLocale === "gr") {
+      newPath =
+        "/gr" + (cleanPath.startsWith("/") ? cleanPath : "/" + cleanPath);
+    }
 
-    window.history.replaceState({}, "", siteBase + newPath + hash);
+    // Ensure trailing slash if not already there (Astro config has trailingSlash: "always")
+    if (!newPath.endsWith("/")) {
+      newPath += "/";
+    }
+
+    window.location.href = newPath + hash;
   }
 
   function getHref(path: string) {
     if (path.startsWith("#")) return path;
-    const siteBase =
-      import.meta.env.BASE_URL === "/"
-        ? ""
-        : import.meta.env.BASE_URL.replace(/\/$/, "");
-    const localeBase = $activeLocale === "gr" ? "/gr" : "";
-    return (siteBase + localeBase + path).replace(/\/$/, "") || siteBase || "/";
+    const prefix = initialLocale === "gr" ? "/gr" : "";
+    let cleanPath = path.startsWith("/") ? path : "/" + path;
+
+    // Ensure trailing slash for consistency with Astro config
+    if (!cleanPath.endsWith("/") && !cleanPath.includes("#")) {
+      cleanPath += "/";
+    }
+
+    return (prefix + cleanPath).replace(/\/+$/, "/") || "/";
   }
 
   const navLinks = $derived([
-    { label: t($activeLocale, "header.about"), href: "#about" },
-    { label: t($activeLocale, "header.projects"), href: "#projects" },
-    { label: t($activeLocale, "header.contact"), href: "#contact" },
+    { label: t(initialLocale, "header.about"), href: "#about" },
+    { label: t(initialLocale, "header.projects"), href: "#projects" },
+    { label: t(initialLocale, "header.contact"), href: "#contact" },
   ]);
 
   function toggleMobileMenu() {
@@ -122,8 +113,8 @@
           class="flex items-center bg-white/5 rounded-xl p-1 border border-white/5"
         >
           <button
-            onclick={() => setLocale("en")}
-            class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all {$activeLocale ===
+            onclick={() => changeLanguage("en")}
+            class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all {initialLocale ===
             'en'
               ? 'bg-white text-black'
               : 'text-white/40 hover:text-white'}"
@@ -131,8 +122,8 @@
             EN
           </button>
           <button
-            onclick={() => setLocale("gr")}
-            class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all {$activeLocale ===
+            onclick={() => changeLanguage("gr")}
+            class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all {initialLocale ===
             'gr'
               ? 'bg-white text-black'
               : 'text-white/40 hover:text-white'}"
@@ -144,7 +135,7 @@
           class="bg-[#FF312E] text-white flex hover:bg-white hover:text-[#FF312E] transition-all duration-300 items-center justify-center gap-2 px-4 py-2 rounded-2xl font-black text-lg
           text-center shadow-[0_10px_50px_rgba(255,49,46,0.3)]"
         >
-          {t($activeLocale, "header.cta")}
+          {t(initialLocale, "header.cta")}
           <Plus class="w-4 h-4" />
         </button>
       </div>
@@ -194,16 +185,16 @@
           <Globe class="w-6 h-6 text-white/20" />
           <div class="flex gap-4">
             <button
-              onclick={() => setLocale("en")}
-              class="text-lg font-bold {$activeLocale === 'en'
+              onclick={() => changeLanguage("en")}
+              class="text-lg font-bold {initialLocale === 'en'
                 ? 'text-white'
                 : 'text-white/20'}"
             >
               English
             </button>
             <button
-              onclick={() => setLocale("gr")}
-              class="text-lg font-bold {$activeLocale === 'gr'
+              onclick={() => changeLanguage("gr")}
+              class="text-lg font-bold {initialLocale === 'gr'
                 ? 'text-white'
                 : 'text-white/20'}"
             >
@@ -215,7 +206,7 @@
           onclick={closeMobileMenu}
           class="bg-[#FF312E] text-white flex items-center justify-center gap-2 p-4 rounded-2xl font-black text-xl text-center shadow-[0_20px_50px_rgba(255,49,46,0.3)]"
         >
-          {t($activeLocale, "header.cta")}
+          {t(initialLocale, "header.cta")}
           <Plus class="w-4 h-4" />
         </button>
       </div>

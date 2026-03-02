@@ -5,7 +5,8 @@
   import { ExternalLink, ChevronLeft, ChevronRight } from "@lucide/svelte";
   import { onMount } from "svelte";
   import { register } from "swiper/element/bundle";
-  import { activeLocale } from "$lib/i18n/store";
+  import { type Locale } from "$lib/i18n/t";
+  const { locale = "en" } = $props<{ locale?: Locale }>();
 
   let projectsSection: HTMLElement;
   let swiperEl: any;
@@ -13,28 +14,28 @@
   let projects = $derived([
     {
       id: "01",
-      title: t($activeLocale, "projects.projectOne.title"),
-      subtitle: t($activeLocale, "projects.projectOne.subtitle"),
-      description: t($activeLocale, "projects.projectOne.description"),
-      features: t($activeLocale, "projects.projectOne.features"),
+      title: t(locale, "projects.projectOne.title"),
+      subtitle: t(locale, "projects.projectOne.subtitle"),
+      description: t(locale, "projects.projectOne.description"),
+      features: t(locale, "projects.projectOne.features"),
       image: "/images/Nasia1.jpg",
       link: "https://nasia-adam.com",
     },
     {
       id: "02",
-      title: t($activeLocale, "projects.projectTwo.title"),
-      subtitle: t($activeLocale, "projects.projectTwo.subtitle"),
-      description: t($activeLocale, "projects.projectTwo.description"),
-      features: t($activeLocale, "projects.projectTwo.features"),
+      title: t(locale, "projects.projectTwo.title"),
+      subtitle: t(locale, "projects.projectTwo.subtitle"),
+      description: t(locale, "projects.projectTwo.description"),
+      features: t(locale, "projects.projectTwo.features"),
       image: "/images/Nasia2.jpg",
       link: "https://dotheworkintensive.com",
     },
     {
       id: "03",
-      title: t($activeLocale, "projects.projectThree.title"),
-      subtitle: t($activeLocale, "projects.projectThree.subtitle"),
-      description: t($activeLocale, "projects.projectThree.description"),
-      features: t($activeLocale, "projects.projectThree.features"),
+      title: t(locale, "projects.projectThree.title"),
+      subtitle: t(locale, "projects.projectThree.subtitle"),
+      description: t(locale, "projects.projectThree.description"),
+      features: t(locale, "projects.projectThree.features"),
       image: "/images/Ecommerce.jpg",
       link: "https://stolesergasias.gr",
     },
@@ -94,7 +95,7 @@
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
       <div class="space-y-4">
         <h2 class="text-4xl md:text-5xl font-bold tracking-tight">
-          {t($activeLocale, "projects.title")}
+          {t(locale, "projects.title")}
         </h2>
       </div>
 
@@ -172,7 +173,7 @@
                   rel="noopener noreferrer"
                   class="inline-flex items-center gap-2 text-[#FF312E] font-semibold group/link"
                 >
-                  {t($activeLocale, "projects.viewProject")}
+                  {t(locale, "projects.viewProject")}
                   <ExternalLink
                     class="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform"
                   />

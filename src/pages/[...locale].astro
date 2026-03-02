@@ -1,0 +1,20 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import Hero from "$lib/components/Hero.svelte";
+import About from "$lib/components/About.svelte";
+import Projects from "$lib/components/Projects.svelte";
+import Form from "$lib/components/Form.svelte";
+
+export function getStaticPaths() {
+  return [{ params: { locale: undefined } }, { params: { locale: "gr" } }];
+}
+
+const { locale = "en" } = Astro.params;
+---
+
+<Layout locale={locale as "en" | "gr"}>
+  <Hero locale={locale as "en" | "gr"} client:load />
+  <About locale={locale as "en" | "gr"} client:visible />
+  <Projects locale={locale as "en" | "gr"} client:visible />
+  <Form locale={locale as "en" | "gr"} client:visible />
+</Layout>

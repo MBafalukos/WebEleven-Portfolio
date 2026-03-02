@@ -3,12 +3,11 @@ import "../styles/global.css";
 import Header from "$lib/components/Header.svelte";
 import Footer from "$lib/components/Footer.svelte";
 import SmoothScroll from "$lib/components/SmoothScroll.svelte";
-import { getLocale } from "astro-i18n-aut";
+interface Props {
+  locale?: "en" | "gr";
+}
 
-type Locale = "en" | "gr";
-
-const raw = getLocale(Astro.url);
-const locale: Locale = raw === "gr" ? "gr" : "en";
+const { locale = "en" } = Astro.props;
 const langAttr = locale === "gr" ? "el" : "en";
 const metaDescription =
   locale === "gr"
@@ -30,6 +29,6 @@ const metaDescription =
     <main>
       <slot />
     </main>
-    <Footer client:visible />
+    <Footer locale={locale} client:visible />
   </body>
 </html>

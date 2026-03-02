@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { t, type Locale } from "$lib/i18n/t";
+  import { t } from "$lib/i18n/t";
   import gsap from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import * as Avatar from "$lib/components/ui/avatar/index.js";
   import { Github, Linkedin, User, File } from "@lucide/svelte";
   import { Badge } from "$lib/components/ui/badge/index.js";
-  import { activeLocale } from "$lib/i18n/store";
+  import { type Locale } from "$lib/i18n/t";
+  const { locale = "en" } = $props<{ locale?: Locale }>();
 
   let aboutSection: HTMLElement;
 
@@ -36,15 +37,15 @@
     <div class="space-y-6">
       <h2 class="text-3xl md:text-4xl font-semibold flex items-center gap-3">
         <User class="w-8 h-8 text-[#FF312E]" />
-        {t($activeLocale, "about.title")}
+        {t(locale, "about.title")}
       </h2>
 
       <p class="text-white/70 leading-relaxed">
-        {t($activeLocale, "about.description1")}
+        {t(locale, "about.description1")}
       </p>
 
       <p class="text-white/60">
-        {t($activeLocale, "about.description2")}
+        {t(locale, "about.description2")}
       </p>
       <div class="flex gap-2">
         <a href="https://github.com/MBafalukos" class="flex items-center gap-2"

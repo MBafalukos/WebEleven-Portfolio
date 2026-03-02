@@ -9,7 +9,8 @@
     Send,
     CheckCircle2,
   } from "@lucide/svelte";
-  import { activeLocale } from "$lib/i18n/store";
+
+  const { locale = "en" } = $props<{ locale?: Locale }>();
 
   let contactSection: HTMLElement;
   let name = $state("");
@@ -54,7 +55,7 @@
 <section id="contact" bind:this={contactSection} class="py-24 text-white px-6">
   <div class="max-w-7xl mx-auto space-y-16">
     <h2 class="text-4xl md:text-5xl font-bold text-center tracking-tight">
-      {t($activeLocale, "form.title")}
+      {t(locale, "form.title")}
     </h2>
 
     <div class="grid lg:grid-cols-2 gap-16 items-center">
@@ -83,14 +84,14 @@
               class="flex items-center gap-2 text-sm font-medium"
             >
               <User class="w-4 h-4 text-white/60" />
-              {t($activeLocale, "form.name")}
+              {t(locale, "form.name")}
             </label>
             <input
               type="text"
               id="name"
               bind:value={name}
               class="w-full bg-neutral-900/50 border border-white/10 rounded-xl px-4 py-4 focus:border-[#FF312E] outline-none transition-all focus:ring-1 focus:ring-[#FF312E]/50"
-              placeholder={t($activeLocale, "form.name")}
+              placeholder={t(locale, "form.name")}
             />
           </div>
 
@@ -100,7 +101,7 @@
               class="flex items-center gap-2 text-sm font-medium"
             >
               <Mail class="w-4 h-4 text-white/60" />
-              {t($activeLocale, "form.email")}
+              {t(locale, "form.email")}
             </label>
             <input
               type="email"
@@ -108,7 +109,7 @@
               bind:value={email}
               required
               class="w-full bg-neutral-900/50 border border-white/10 rounded-xl px-4 py-4 focus:border-[#FF312E] outline-none transition-all focus:ring-1 focus:ring-[#FF312E]/50"
-              placeholder={t($activeLocale, "form.email")}
+              placeholder={t(locale, "form.email")}
             />
           </div>
 
@@ -118,14 +119,14 @@
               class="flex items-center gap-2 text-sm font-medium"
             >
               <MessageCircleMore class="w-4 h-4 text-white/60" />
-              {t($activeLocale, "form.message")}
+              {t(locale, "form.message")}
             </label>
             <textarea
               id="message"
               bind:value={message}
               rows="4"
               class="w-full bg-neutral-900/50 border border-white/10 rounded-xl px-4 py-4 focus:border-[#FF312E] outline-none transition-all focus:ring-1 focus:ring-[#FF312E]/50 resize-none"
-              placeholder={t($activeLocale, "form.message")}
+              placeholder={t(locale, "form.message")}
             ></textarea>
           </div>
 
@@ -135,7 +136,7 @@
                 class="w-full h-16 flex items-center justify-center gap-3 bg-green-500/10 text-green-500 border border-green-500/20 font-bold rounded-xl transition-all duration-300"
               >
                 <CheckCircle2 class="w-5 h-5" />
-                {t($activeLocale, "form.success")}
+                {t(locale, "form.success")}
               </div>
             {:else}
               <button
@@ -143,11 +144,11 @@
                 class="w-full h-16 flex items-center justify-center gap-3 bg-[#FF312E] text-white font-bold rounded-xl hover:bg-white hover:text-black transition-all duration-300 shadow-[0_20px_40px_rgba(255,49,46,0.2)]"
               >
                 <Send class="w-5 h-5" />
-                {t($activeLocale, "form.submit")}
+                {t(locale, "form.submit")}
               </button>
             {/if}
             <p class="text-xs text-white/40 text-center">
-              {t($activeLocale, "form.gdpr")}
+              {t(locale, "form.gdpr")}
             </p>
           </div>
         </form>

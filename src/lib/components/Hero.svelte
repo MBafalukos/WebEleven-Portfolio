@@ -4,7 +4,7 @@
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { ScrollToPlugin } from "gsap/ScrollToPlugin";
   import { ChevronsDown } from "@lucide/svelte";
-  import { activeLocale } from "$lib/i18n/store";
+  const { locale = "en" } = $props<{ locale?: Locale }>();
 
   let heroContainer: HTMLElement;
   let heroContent: HTMLElement;
@@ -107,11 +107,11 @@
     class="max-w-4xl text-center space-y-8 will-change-[transform,opacity]"
   >
     <h1 class="text-4xl md:text-8xl font-bold tracking-tight">
-      {t($activeLocale, "hero.title")}
+      {t(locale, "hero.title")}
     </h1>
 
     <h2 class="text-lg md:text-2xl text-[#FFFFFA]/70 max-w-2xl mx-auto">
-      {t($activeLocale, "hero.subtitle")}
+      {t(locale, "hero.subtitle")}
     </h2>
 
     <div class="pt-8 flex justify-center">
@@ -122,7 +122,7 @@
         <span
           class="text-[#FF312E] font-bold tracking-[0.2em] text-sm uppercase transition-all group-hover:tracking-[0.4em]"
         >
-          {t($activeLocale, "hero.cta")}
+          {t(locale, "hero.cta")}
         </span>
 
         <div class="relative w-16 h-16 flex items-center justify-center">

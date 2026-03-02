@@ -50,20 +50,21 @@
         <a href="https://github.com/MBafalukos" class="flex items-center gap-2"
           ><Badge>Github<Github /></Badge></a
         >
-        <a
-          href="https://www.linkedin.com/in/mbafalukos/"
-          class="flex items-center gap-2"><Badge>LinkedIn<Linkedin /></Badge></a
+        <a href="www.linkedin.com/in/mbafalukos" class="flex items-center gap-2"
+          ><Badge>LinkedIn<Linkedin /></Badge></a
         >
       </div>
     </div>
 
-    <div class=" h-80 flex items-center justify-center overflow-hidden">
+    <div class="flex items-center rounded-3xl justify-center overflow-hidden">
       <img
         src="{import.meta.env.BASE_URL}/images/avatar.webp"
         alt="Michalis Bafalukos"
         width={500}
         height={500}
-        class="w-full h-full rounded-3xl object-contain"
+        class="w-full h-full object-contain"
+        decoding="async"
+        loading="lazy"
       />
     </div>
   </div>

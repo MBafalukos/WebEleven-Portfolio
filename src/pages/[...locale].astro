@@ -4,6 +4,7 @@ import Hero from "$lib/components/Hero.svelte";
 import About from "$lib/components/About.svelte";
 import Projects from "$lib/components/Projects.svelte";
 import Form from "$lib/components/Form.svelte";
+import avatarImage from "../assets/images/avatar.webp";
 
 export function getStaticPaths() {
   return [
@@ -17,7 +18,7 @@ const { locale = "en" } = Astro.params;
 
 <Layout locale={locale as "en" | "gr"}>
   <Hero locale={locale as "en" | "gr"} client:load />
-  <About locale={locale as "en" | "gr"} client:visible />
+  <About locale={locale as "en" | "gr"} avatar={avatarImage} client:visible />
   <Projects locale={locale as "en" | "gr"} client:visible />
   <Form locale={locale as "en" | "gr"} client:visible />
 </Layout>

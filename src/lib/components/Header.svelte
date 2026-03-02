@@ -7,46 +7,41 @@
 
   let isMobileMenuOpen = $state(false);
 
-  function changeLanguage(newLocale: Locale) {
+  function changeLanguage(newLocale: string) {
     if (newLocale === initialLocale) return;
 
+    // 1. Get the current clean path from the browser
     const currentPath = window.location.pathname;
-    const hash = window.location.hash || "";
+    // Example: /WebEleven-Portfolio/ or /WebEleven-Portfolio/gr/
 
-    // Remove existing locale prefix if present
-    let cleanPath = currentPath;
-    if (currentPath.startsWith("/gr/")) {
-      cleanPath = currentPath.replace("/gr/", "/");
-    } else if (currentPath === "/gr") {
-      cleanPath = "/";
-    }
+    // 2. Define your base (should match astro.config.mjs)
+    const base = "/WebEleven-Portfolio";
 
-    // Prepend new locale if not default (en)
-    let newPath = cleanPath;
-    if (newLocale === "gr") {
-      newPath =
-        "/gr" + (cleanPath.startsWith("/") ? cleanPath : "/" + cleanPath);
-    }
+    // 3. Strip the base and any existing locale to get the "raw" route
+    // This regex removes the base AND the /gr if they exist at the start
+    let route = currentPath.replace(base, "");
+    route = route.replace(/^\/gr/, "");
 
-    // Ensure trailing slash if not already there (Astro config has trailingSlash: "always")
-    if (!newPath.endsWith("/")) {
-      newPath += "/";
-    }
+    // 4. Construct the new URL
+    // Logic: Base + (New Locale if not default) + Clean Route
+    const localePart = newLocale === "en" ? "" : "/gr";
 
-    window.location.href = newPath + hash;
+    // Combine, remove double slashes, and ensure trailing slash for Astro
+    const newURL = (base + localePart + route).replace(/\/+/g, "/") + "/";
+
+    window.location.href = newURL;
   }
 
   function getHref(path: string) {
     if (path.startsWith("#")) return path;
-    const prefix = initialLocale === "gr" ? "/gr" : "";
-    let cleanPath = path.startsWith("/") ? path : "/" + path;
 
-    // Ensure trailing slash for consistency with Astro config
-    if (!cleanPath.endsWith("/") && !cleanPath.includes("#")) {
-      cleanPath += "/";
-    }
+    const base = "/WebEleven-Portfolio";
+    const localePart = initialLocale === "en" ? "" : "/gr";
 
-    return (prefix + cleanPath).replace(/\/+$/, "/") || "/";
+    // Normalize the path to ensure it doesn't double up slashes
+    const cleanPath = path.startsWith("/") ? path : `/${path}`;
+
+    return (base + localePart + cleanPath).replace(/\/+/g, "/");
   }
 
   const navLinks = $derived([

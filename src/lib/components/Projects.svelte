@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { t, type Locale } from "$lib/i18n/t";
+  import { t } from "$lib/i18n/t";
   import gsap from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { ExternalLink, ChevronLeft, ChevronRight } from "@lucide/svelte";
@@ -128,10 +128,11 @@
               <img
                 src={project.image}
                 alt={project.title}
-                width="800"
-                height="800"
+                width="1200"
+                height="900"
                 loading="lazy"
                 decoding="async"
+                fetchpriority="low"
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 will-change-transform"
               />
             </div>

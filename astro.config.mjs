@@ -12,8 +12,7 @@ const locales = {
 };
 
 export default defineConfig({
-  site: "https://MBafalukos.github.io",
-  base: "/WebEleven-Portfolio",
+  
   trailingSlash: "always",
   build: { format: "directory" },
 
@@ -23,7 +22,9 @@ export default defineConfig({
     svelte(),
     i18n({ locales, defaultLocale }),
     sitemap({
-      i18n: { locales, defaultLocale },
+      i18n: { locales, defaultLocale,routing: {
+      prefixDefaultLocale: true, // Ensures that your default locale is prefixed aswell
+    }},
       filter: filterSitemapByDefaultLocale({ defaultLocale }),
     }),
   ],

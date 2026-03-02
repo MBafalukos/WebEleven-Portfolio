@@ -10,6 +10,10 @@ type Locale = "en" | "gr";
 const raw = getLocale(Astro.url);
 const locale: Locale = raw === "gr" ? "gr" : "en";
 const langAttr = locale === "gr" ? "el" : "en";
+const metaDescription =
+  locale === "gr"
+    ? "Michalis Bafalukos — full-stack developer. Δες projects με React, Svelte, Astro, Tailwind και Python και επικοινώνησε μαζί μου."
+    : "Michalis Bafalukos — full-stack developer building modern web apps with React, Svelte, Astro, Tailwind CSS, and Python. Explore projects and get in touch.";
 ---
 
 <html lang={langAttr}>
@@ -17,6 +21,7 @@ const langAttr = locale === "gr" ? "el" : "en";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={metaDescription} />
     <title>Astro Portfolio</title>
   </head>
   <body class="bg-[#000103] text-[#FFFFFA]">

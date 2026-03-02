@@ -10,7 +10,7 @@
 
   let projectsSection: HTMLElement;
   let swiperEl: any;
-
+  const base = import.meta.env.BASE_URL;
   let projects = $derived([
     {
       id: "01",
@@ -18,7 +18,7 @@
       subtitle: t(locale, "projects.projectOne.subtitle"),
       description: t(locale, "projects.projectOne.description"),
       features: t(locale, "projects.projectOne.features"),
-      image: "/images/Nasia1.jpg",
+      image: `${base}/images/Nasia1.jpg`.replace(/\/+/g, "/"),
       link: "https://nasia-adam.com",
     },
     {
@@ -27,7 +27,7 @@
       subtitle: t(locale, "projects.projectTwo.subtitle"),
       description: t(locale, "projects.projectTwo.description"),
       features: t(locale, "projects.projectTwo.features"),
-      image: "/images/Nasia2.jpg",
+      image: `${base}/images/Nasia2.jpg`.replace(/\/+/g, "/"),
       link: "https://dotheworkintensive.com",
     },
     {
@@ -36,7 +36,7 @@
       subtitle: t(locale, "projects.projectThree.subtitle"),
       description: t(locale, "projects.projectThree.description"),
       features: t(locale, "projects.projectThree.features"),
-      image: "/images/Ecommerce.jpg",
+      image: `${base}/images/Ecommerce.jpg`.replace(/\/+/g, "/"),
       link: "https://stolesergasias.gr",
     },
   ]);

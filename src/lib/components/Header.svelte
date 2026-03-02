@@ -27,7 +27,7 @@
     const localePart = newLocale === "en" ? "" : "/gr";
 
     // Combine, remove double slashes, and ensure trailing slash for Astro
-    const newURL = (base + localePart + route).replace(/\/+/g, "/") + "/";
+    const newURL = (base + localePart + route).replace(/\/+/g, "/");
 
     window.location.href = newURL;
   }

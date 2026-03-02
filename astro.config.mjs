@@ -4,6 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  base: "/WebEleven-Portfolio",
   i18n: {
     defaultLocale: "en",
     locales: ["en", "gr"],

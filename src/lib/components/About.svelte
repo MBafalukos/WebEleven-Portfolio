@@ -59,16 +59,13 @@
     </div>
 
     <div class=" h-80 flex items-center justify-center overflow-hidden">
-      <Avatar.Root class="w-72 h-72">
-        <Avatar.Image
-          src="./images/avatar.webp"
-          class="w-full h-full object-contain"
-          alt="Michalis Bafalukos"
-          loading="lazy"
-          decoding="async"
-        />
-        <Avatar.Fallback>MB</Avatar.Fallback>
-      </Avatar.Root>
+      <img
+        src="{import.meta.env.BASE_URL}/images/avatar.webp"
+        alt="Michalis Bafalukos"
+        width={500}
+        height={500}
+        class="w-full h-full object-contain"
+      />
     </div>
   </div>
 </section>

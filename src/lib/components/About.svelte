@@ -56,20 +56,16 @@
       </div>
     </div>
 
-    <div class="relative group aspect-square max-w-[400px] mx-auto">
+    <div class="relative aspect-square max-w-[400px] mx-auto">
       <div
-        class="absolute -inset-1 bg-gradient-to-r from-[#FF312E] to-orange-600 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"
-      ></div>
-
-      <div
-        class="relative flex items-center justify-center overflow-hidden rounded-[2rem] bg-[#0A0A0A] border border-white/10"
+        class="relative flex items-center justify-center overflow-hidden rounded-3xl bg-[#0A0A0A]"
       >
         <img
           src="{import.meta.env.BASE_URL}/images/avatar.webp"
           alt="Michalis Bafalukos"
           width={500}
           height={500}
-          class="w-full h-full object-cover rounded-[2rem]"
+          class="w-full h-full object-cover rounded-3xl"
           decoding="async"
           loading="lazy"
         />

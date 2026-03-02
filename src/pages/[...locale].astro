@@ -6,7 +6,10 @@ import Projects from "$lib/components/Projects.svelte";
 import Form from "$lib/components/Form.svelte";
 
 export function getStaticPaths() {
-  return [{ params: { locale: undefined } }, { params: { locale: "gr" } }];
+  return [
+    { params: { locale: undefined } }, // Matches /WebEleven-Portfolio/
+    { params: { locale: "gr" } }, // Matches /WebEleven-Portfolio/gr/
+  ];
 }
 
 const { locale = "en" } = Astro.params;

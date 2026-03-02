@@ -10,7 +10,7 @@ export default defineConfig({
     locales: ["en", "gr"],
   },
 
-  trailingSlash: "always",
+  trailingSlash: "never",
   build: { format: "directory" },
 
   vite: { plugins: [tailwindcss()] },

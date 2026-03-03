@@ -1,6 +1,7 @@
 # WebEleven Portfolio
 
 Portfolio Assignment βασισμένο στο Astro framework
+Deployed μέσω github pages : https://mbafalukos.github.io/WebEleven-Portfolio/
 
 ## Run on Local Environment
 
